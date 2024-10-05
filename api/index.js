@@ -55,6 +55,10 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 });
 
 
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 app.post('/api/books', async (req, res) => {
   try {
     const { title, description, coverImage, content, primaryGenre, genres, author, uid } = req.body;
@@ -219,9 +223,7 @@ app.delete('/api/books/:id', async (req, res) => {
 
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+
 
 app.listen(5000, () => {
   console.log('Server is running on port 5000');
