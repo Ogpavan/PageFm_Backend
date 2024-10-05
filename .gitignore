@@ -4,6 +4,9 @@ node_modules/
 # Environment variables file
 .env
 
+# Firebase Admin SDK private key or any other sensitive config
+src/config/serviceAccountKey.json
+
 # Vercel related files (optional, depends on your project)
 .vercel/
 
@@ -15,9 +18,6 @@ yarn-error.log*
 # OS-specific files
 .DS_Store
 Thumbs.db
-
-# Firebase Admin SDK private key (or any other sensitive config)
-src/config/serviceAccountKey.json
 
 # Miscellaneous
 *.log
