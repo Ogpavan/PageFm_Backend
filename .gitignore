@@ -7,6 +7,8 @@ node_modules/
 # Firebase Admin SDK private key or any other sensitive config
 src/config/serviceAccountKey.json
 
+
+src/config
 # Vercel related files (optional, depends on your project)
 .vercel/
 
