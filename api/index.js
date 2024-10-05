@@ -58,6 +58,9 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+app.get('/hello', (req, res) => {
+  res.send('Hello World!');
+});
 
 app.post('/api/books', async (req, res) => {
   try {
