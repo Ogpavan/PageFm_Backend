@@ -1,6 +1,23 @@
-node_modules
+# Node modules folder (dependencies)
+node_modules/
 
+# Environment variables file
 .env
 
+# Vercel related files (optional, depends on your project)
+.vercel/
 
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Firebase Admin SDK private key (or any other sensitive config)
 src/config/serviceAccountKey.json
+
+# Miscellaneous
+*.log
