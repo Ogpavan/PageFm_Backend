@@ -1,16 +1,27 @@
-const express = require('express');
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
+app.listen(3000, () => console.log("Server ready on port 3000."));
+
+module.exports = app;
+
+
+
+// const express = require('express');
 // const mongoose = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 // require('dotenv').config();
 // const writersbooks = require('../src/models/writersbooks.js'); 
-const app = express();
-app.use(cors({
-  origin: '*',  // Allow all origins temporarily for testing
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization'
-}));
+// const app = express();
+// app.use(cors({
+//   origin: '*',  // Allow all origins temporarily for testing
+//   methods: 'GET,POST,PUT,DELETE',
+//   allowedHeaders: 'Content-Type,Authorization'
+// }));
 
-app.use(express.json());
+// app.use(express.json());
 
 // mongoose.connect(process.env.MONGO_URI);
 
@@ -60,9 +71,9 @@ app.use(express.json());
 // });
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello World!');
+// });
 // app.get('/hello', (req, res) => {
 //   res.send('Hello World!');
 // });
@@ -231,4 +242,4 @@ app.get('/', (req, res) => {
 
 
 
-module.exports = app;
+// module.exports = app;
