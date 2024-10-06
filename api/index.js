@@ -5,10 +5,11 @@ require('dotenv').config();
 const writersbooks = require('../src/models/writersbooks.js'); 
 const app = express();
 app.use(cors({
-  origin: 'https://page-fm-frontend.vercel.app',  // Allow only your frontend
+  origin: '*',  // Allow all origins temporarily for testing
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
 }));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI);
@@ -230,8 +231,4 @@ app.delete('/api/books/:id', async (req, res) => {
 
 
 
-
-
-app.listen(5000, () => {
-  console.log('Server is running on port 5000');
-});
+module.exports = app;
