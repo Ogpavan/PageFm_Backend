@@ -8,9 +8,7 @@ node_modules/
 src/config/serviceAccountKey.json
 
 
-src/config
-# Vercel related files (optional, depends on your project)
-.vercel/
+
 
 # Logs
 npm-debug.log*
