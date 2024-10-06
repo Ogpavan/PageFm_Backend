@@ -5,7 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
-const writersbooks = require('../src/models/writersbooks.js'); 
+const writersbooks = require('./models/writersbooks.js'); 
 const app = express();
 app.use(cors({
   origin: '*',  // Allow all origins temporarily for testing
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 app.get('/hello', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello ');
 });
 
 app.post('/api/books', async (req, res) => {
@@ -232,6 +232,10 @@ app.delete('/api/books/:id', async (req, res) => {
   }
 });
 
+
+app.listen(3000, () => {
+  console.log(`Server is running on port 3000`);
+});
 
 
 module.exports = app;
