@@ -1,10 +1,10 @@
 const express = require('express');
 
 const cors = require('cors');
-require('dotenv').config();
+// require('dotenv').config();
 // const writersbooks = require('./models/writersbooks.js');
 
-const app = express();
+// const app = express();
 
 app.use(cors({
   origin: '*',  // Allow all origins temporarily for testing
