@@ -1,6 +1,6 @@
 // src/routes/topReads.js
 const express = require('express');
-const Book = require('../models/book'); // Assuming you have a Book model
+const Book = require('../models/Book'); // Assuming you have a Book model
 const router = express.Router();
 
 // Route to get the most popular reads

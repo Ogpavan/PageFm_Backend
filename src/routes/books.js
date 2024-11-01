@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Book = require('../models/book');
+const Book = require('../models/Book');
 
 // Create a new book
 // Create a new book with an initial episode

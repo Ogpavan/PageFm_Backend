@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Series = require('../models/series');
-const Book = require('../models/book');
+const Book = require('../models/Book');
 
 // Get all series
 router.get('/', async (req, res, next) => {

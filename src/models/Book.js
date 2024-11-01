@@ -65,6 +65,6 @@ bookSchema.pre('save', function (next) {
   next();
 });
 
-const book = mongoose.models.Book || mongoose.model('Book', bookSchema);
+const Book = mongoose.models.Book || mongoose.model('Book', bookSchema);
 
-module.exports = book;
+module.exports = Book;

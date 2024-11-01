@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Book = require('../models/book');
+const Book = require('../models/Book');
 
 // Get all books by a writer
 router.get('/:uid/books', async (req, res, next) => {
