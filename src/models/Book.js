@@ -44,6 +44,7 @@ const bookSchema = new mongoose.Schema({
     type: String, // Firebase UID as String
     required: true,
   },
+  user: { type: String, required: true },
   reads: {
     type: Number,
     default: 0,

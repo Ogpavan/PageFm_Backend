@@ -83,16 +83,40 @@ router.post('/:bookId/episodes', async (req, res, next) => {
 });
 
 // Get all books or filter by genre
+// Get all books or filter by genre and writer
 router.get('/', async (req, res, next) => {
   try {
-    const { primaryGenre } = req.query;
-    const query = primaryGenre ? { primaryGenre } : {};
+    const { primaryGenre, writerId } = req.query;
+    const query = { ...(primaryGenre && { primaryGenre }), ...(writerId && { user: writerId }) };
     const books = await Book.find(query);
     res.json(books);
   } catch (error) {
     next(error);
   }
 });
+
+
+
+// Fetch books for a specific writer by UID
+router.get('/existingbooks', async (req, res, next) => {
+  try {
+    const { userId } = req.query;
+
+    // Check if userId (Firebase UID) is provided
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required' });
+    }
+
+    // Find books where `user` matches the Firebase UID
+    const books = await Book.find({ user: userId });
+
+    res.json(books);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 // Get a single book by ID and increment reads
 router.get('/:id', async (req, res, next) => {
@@ -112,6 +136,10 @@ router.get('/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+
+ 
+
 
 // Delete a book by ID
 router.delete('/:id', async (req, res, next) => {
