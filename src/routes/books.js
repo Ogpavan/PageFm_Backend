@@ -137,6 +137,56 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// Update an episode for a specific book
+router.put('/:bookId/episodes/:episodeId', async (req, res, next) => {
+  try {
+    const { bookId, episodeId } = req.params;
+    const { title, content } = req.body;
+
+    // Validate ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(bookId) || !mongoose.Types.ObjectId.isValid(episodeId)) {
+      return res.status(400).json({ error: 'Invalid ID format' });
+    }
+
+    const book = await Book.findById(bookId);
+    if (!book) return res.status(404).json({ error: 'Book not found' });
+
+    const episode = book.episodes.id(episodeId);
+    if (!episode) return res.status(404).json({ error: 'Episode not found' });
+
+    // Update episode details
+    episode.title = title;
+    episode.content = content;
+    await book.save();
+
+    res.json({ message: 'Episode updated successfully', episode });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get a specific episode of a specific book
+router.get('/:bookId/episodes/:episodeId', async (req, res, next) => {
+  try {
+    const { bookId, episodeId } = req.params;
+
+    // Validate ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(bookId) || !mongoose.Types.ObjectId.isValid(episodeId)) {
+      return res.status(400).json({ error: 'Invalid book ID or episode ID' });
+    }
+
+    const book = await Book.findById(bookId);
+    if (!book) return res.status(404).json({ error: 'Book not found' });
+
+    // Find the episode by ID
+    const episode = book.episodes.id(episodeId);
+    if (!episode) return res.status(404).json({ error: 'Episode not found' });
+
+    res.json(episode);
+  } catch (error) {
+    next(error);
+  }
+});
 
  
 
