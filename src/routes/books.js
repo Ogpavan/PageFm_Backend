@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Book = require('../models/Book');
+const BookSummary = require('../models/BookSummary');
 
 // Create a new book
 // Create a new book with an initial episode
@@ -128,14 +129,25 @@ router.get('/:id', async (req, res, next) => {
       return res.status(400).json({ error: 'Invalid book ID' });
     }
 
+    // Increment reads in Book and get updated book
     const book = await Book.findByIdAndUpdate(id, { $inc: { reads: 1 } }, { new: true });
-    if (!book) return res.status(404).json({ error: 'Book not found' });
+
+    if (!book) {
+      return res.status(404).json({ error: 'Book not found' });
+    }
+
+    // Update the BookSummary readsCount
+    const bookSummary = await BookSummary.findOne({ book: id });
+    if (bookSummary) {
+      await bookSummary.incrementReads(); // Increment readsCount in BookSummary
+    }
 
     res.json(book);
   } catch (error) {
     next(error);
   }
 });
+
 
 // Update an episode for a specific book
 router.put('/:bookId/episodes/:episodeId', async (req, res, next) => {

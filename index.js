@@ -13,7 +13,8 @@ const app = express();
 const bookRoutes = require('./src/routes/books');
 const writerRoutes = require('./src/routes/writers');
 const topReadsRoutes = require('./src/routes/topReads');
-const careerRoutes = require('./src/routes/careers'); // New topReads route
+const careerRoutes = require('./src/routes/careers');
+const bookSummaryRoutes = require('./src/routes/book_home'); // New topReads route
 
 // Middleware
 app.use(cors({
@@ -29,6 +30,7 @@ mongoose.connect(process.env.MONGO_URI )
   .catch((error) => console.error('MongoDB connection error:', error));
 
 // Register Routes
+app.use('/api/book-home', bookSummaryRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/writers', writerRoutes);
 app.use('/api/top-reads', topReadsRoutes); // New topReads route
