@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const Book = require('../models/Book');
 const BookSummary = require('../models/BookSummary');
+const { cloudinary } = require('../config/cloudinary');
 
 // Create a new book
 // Create a new book with an initial episode
@@ -207,14 +208,29 @@ router.get('/:bookId/episodes/:episodeId', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    // Find and delete the book by ID
     const book = await Book.findByIdAndDelete(id);
     if (!book) return res.status(404).json({ error: 'Book not found' });
-    res.json({ message: 'Book deleted successfully' });
+
+    // Extract the publicId from the coverImage URL for Cloudinary deletion
+    const coverImageUrl = book.coverImage;
+    const publicId = coverImageUrl.split('/').slice(-2).join('/').split('.')[0]; // Extracts 'bookify/dk2bv4wujbj1vynclfdy'
+
+    // Delete the cover image from Cloudinary
+    const cloudinaryResult = await cloudinary.uploader.destroy(publicId);
+ // Log Cloudinary response
+
+    // Delete the associated BookSummary entry
+    const bookSummary = await BookSummary.findOneAndDelete({ book: id });
+  
+
+    res.json({ message: 'Book, summary, and cover image deleted successfully' });
   } catch (error) {
+    console.error('Error in delete route:', error);
     next(error);
   }
 });
-
 
 
 
